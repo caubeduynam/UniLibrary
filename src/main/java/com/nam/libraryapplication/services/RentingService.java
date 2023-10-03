@@ -44,4 +44,41 @@ public class RentingService {
             return new ResponseEntity<>("Created Failed", HttpStatus.BAD_REQUEST);
         }
     }
+
+    public ResponseEntity<List<Renting>> getRenting() {
+        return new ResponseEntity<>(rentingRepo.findAll(), HttpStatus.OK);
+    }
+
+// ******BUGGED
+//    public ResponseEntity<String> updateRentingByID(Integer id, Renting renting) {
+//        Integer temp = 0;
+//        try {
+//            if(rentingRepo.existsById(id)) {
+//                for(int i = 0; i < renting.getBookID().size(); i++) {
+//                    if(!bookRepo.existsById(renting.getBookID().get(i))) {
+//                        temp++;
+//                    }
+//                }
+//                if(temp != 0) {
+//                    return new ResponseEntity<>("Book not existed !!! \nUpdated Failed !!!" , HttpStatus.OK);
+//                } else {
+//                    renting.setRentID(id);
+//                    rentingRepo.save(renting);
+//                    return new ResponseEntity<>("Updated Success", HttpStatus.OK);
+//                }
+//            }
+//        }catch(Exception e) {
+//            e.getStackTrace();
+//        }
+//        return new ResponseEntity<>("Could not find the following ID !!!\nUpdated Failed", HttpStatus.BAD_REQUEST);
+//    }
+
+    public ResponseEntity<String> deleteRentingByID(Integer id) {
+        if (rentingRepo.existsById(id)) {
+            rentingRepo.deleteById(id);
+            return new ResponseEntity<>("Deleted Success !!!", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Could not find the following ID !!!\nDeleted Failed", HttpStatus.BAD_REQUEST);
+        }
+    }
 }
