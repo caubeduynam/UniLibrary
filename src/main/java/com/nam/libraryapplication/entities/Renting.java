@@ -23,10 +23,10 @@ public class Renting {
     private LocalDate rentDate;
 
     @ManyToOne
-    private Student studentID;
+    private Student student;
 
     @ManyToMany
-    private List<Book> bookID;
+    private List<Book> book;
 
     public void getRentDate(Date rentDate) {
     }

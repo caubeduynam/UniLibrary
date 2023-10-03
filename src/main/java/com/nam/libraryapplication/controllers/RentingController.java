@@ -21,4 +21,9 @@ public class RentingController {
                                                 @RequestParam List<Integer> bookID, Renting renting) {
         return rentingService.createRenting(rentDate, studentID, bookID, renting);
     }
+
+    @GetMapping("/list")
+    public ResponseEntity<List<Renting>> getRenting() {
+        return rentingService.getRenting();
+    }
 }

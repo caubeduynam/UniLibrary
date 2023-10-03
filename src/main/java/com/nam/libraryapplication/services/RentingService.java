@@ -44,4 +44,8 @@ public class RentingService {
             return new ResponseEntity<>("Created Failed", HttpStatus.BAD_REQUEST);
         }
     }
+
+    public ResponseEntity<List<Renting>> getRenting() {
+        return new ResponseEntity<>(rentingRepo.findAll(), HttpStatus.OK);
+    }
 }
