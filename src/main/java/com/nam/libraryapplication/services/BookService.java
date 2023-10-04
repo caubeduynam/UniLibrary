@@ -2,8 +2,8 @@ package com.nam.libraryapplication.services;
 
 import com.nam.libraryapplication.entities.Book;
 import com.nam.libraryapplication.entities.Renting;
-import com.nam.libraryapplication.repos.RentingRepo;
 import com.nam.libraryapplication.repos.BookRepo;
+import com.nam.libraryapplication.repos.RentingRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.http.HttpStatus;
@@ -55,8 +55,8 @@ public class BookService {
             if(bookRepo.existsById(id)) {
                 Book bookToDelete = bookRepo.findById(id).orElse(null);
                 if(bookToDelete != null) {
-                    List<Renting> rentsContainBookToDelete = rentingRepo.findRentsContainBookToDelete(bookToDelete);
-                    if(!rentsContainBookToDelete.isEmpty()) {
+                    List<Renting> rentsContainingBook = rentingRepo.findByBookIDContaining(bookToDelete);
+                    if(!rentsContainingBook.isEmpty()) {
                         return new ResponseEntity<>("You must delete rents that contain this book first !!!", HttpStatus.BAD_REQUEST);
                     } else{
                         bookRepo.deleteById(id);

@@ -21,4 +21,19 @@ public class RentingController {
                                                 @RequestParam List<Integer> bookID, Renting renting) {
         return rentingService.createRenting(rentDate, studentID, bookID, renting);
     }
+
+    @GetMapping("/list")
+    public ResponseEntity<List<Renting>> getRenting() {
+        return rentingService.getRenting();
+    }
+
+//    @PutMapping("/update/{id}")
+//    public ResponseEntity<String> updateRentingByID(@PathVariable Integer id, @RequestBody Renting renting) {
+//        return rentingService.updateRentingByID(id, renting);
+//    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteRentingByID(@PathVariable Integer id) {
+        return rentingService.deleteRentingByID(id);
+    }
 }

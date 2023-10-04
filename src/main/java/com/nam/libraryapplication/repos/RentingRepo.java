@@ -7,8 +7,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
 public interface RentingRepo extends JpaRepository<Renting, Integer> {
-    List<Renting> findRentsContainBookToDelete(Book bookToDelete);
+//    List<Renting> findRentsContainBookToDelete(Book bookToDelete);
 
+    List<Renting> findByBookIDContaining(Book bookToDelete);
 }
