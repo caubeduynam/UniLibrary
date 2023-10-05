@@ -60,18 +60,24 @@ public class RentingService {
 // ******BUGGED
     public ResponseEntity<String> updateRentingByID(Integer id, Renting renting) {
         Integer temp = 0;
+        Integer temp_temp = 0;
         try {
-            for(int i = 0; i < renting.getBookID().size(); i++) {
-                if(!bookRepo.existsById(renting.getBookID().get(i).getBookID())) {
-                    temp++;
+            if(rentingRepo.existsById(id)) {
+                for(int i = 0; i < renting.getBookID().size(); i++) {
+                    if(!bookRepo.existsById(renting.getBookID().get(i).getBookID())) {
+                        temp++;
+                    }
                 }
-            }
-            if(temp != 0) {
-                return new ResponseEntity<>("Book not existed !!! \nUpdated Failed !!!" , HttpStatus.OK);
-            } else {
-                renting.setRentID(id);
-                rentingRepo.save(renting);
-                return new ResponseEntity<>("Updated Success", HttpStatus.OK);
+                if(!studentRepo.existsById(renting.getStudentID().getStudentID())) {
+                    temp_temp++;
+                }
+                if(temp != 0 || temp_temp != 0) {
+                    return new ResponseEntity<>("Book or Student not existed !!! \nUpdated Failed !!!" , HttpStatus.OK);
+                } else {
+                    renting.setRentID(id);
+                    rentingRepo.save(renting);
+                    return new ResponseEntity<>("Updated Success", HttpStatus.OK);
+                }
             }
         } catch(Exception e) {
             e.getStackTrace();
