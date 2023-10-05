@@ -27,10 +27,10 @@ public class RentingController {
         return rentingService.getRenting();
     }
 
-//    @PutMapping("/update/{id}")
-//    public ResponseEntity<String> updateRentingByID(@PathVariable Integer id, @RequestBody Renting renting) {
-//        return rentingService.updateRentingByID(id, renting);
-//    }
+    @PutMapping("/update/{id}")
+    public ResponseEntity<String> updateRentingByID(@PathVariable Integer id, @RequestBody Renting renting) {
+        return rentingService.updateRentingByID(id, renting);
+    }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteRentingByID(@PathVariable Integer id) {
