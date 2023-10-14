@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookService {
@@ -68,5 +69,17 @@ public class BookService {
             e.getStackTrace();
         }
             return new ResponseEntity<>("Could not find the following ID !!!\nDeleted Failed !!!", HttpStatus.BAD_REQUEST);
+    }
+
+    public ResponseEntity<Optional<Book>> getBookById(Integer id) {
+        try {
+            if(bookRepo.existsById(id)) {
+                return new ResponseEntity<>(bookRepo.findById(id), HttpStatus.OK);
+            }
+        } catch(Exception e) {
+            e.getStackTrace();
+        }
+
+        return new ResponseEntity<>(Optional.empty(), HttpStatus.BAD_REQUEST);
     }
 }

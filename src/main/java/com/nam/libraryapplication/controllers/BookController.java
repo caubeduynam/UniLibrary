@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/book")
@@ -22,6 +23,11 @@ public class BookController {
     @GetMapping("/list")
     public ResponseEntity<List<Book>> getBooks() {
         return bookService.getBooks();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<Book>> getBookById(@PathVariable Integer id) {
+        return bookService.getBookById(id);
     }
 
     @PutMapping("/update/{id}")
